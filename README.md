@@ -17,17 +17,22 @@ Teaches AI coding assistants (Claude Code, Cursor, Copilot, Codex) to:
 - **Check and optimize** quality scores
 - **Search** 170,000+ indexed agents across 25 blockchains
 
-## Auto-Updating
+## Files
 
-The skill files are served from [thespawn.io](https://thespawn.io) and always reflect the latest chains, scoring rules, and API endpoints. No need to update the repo manually.
+This repo is the source of truth. [thespawn.io/skill/](https://thespawn.io/skill/skill.md) mirrors these files at deploy time.
 
-| File | URL |
-|------|-----|
-| skill.md | [thespawn.io/skill.md](https://thespawn.io/skill.md) |
-| register.md | [thespawn.io/register.md](https://thespawn.io/register.md) |
-| metadata.md | [thespawn.io/metadata.md](https://thespawn.io/metadata.md) |
-| quality.md | [thespawn.io/quality.md](https://thespawn.io/quality.md) |
-| search.md | [thespawn.io/search.md](https://thespawn.io/search.md) |
+| File | Content |
+|------|---------|
+| [SKILL.md](SKILL.md) | Overview, quick start, API index |
+| [register.md](register.md) | On-chain minting, viem script, supported chains |
+| [metadata.md](metadata.md) | JSON schema, services, URI strategies |
+| [quality.md](quality.md) | Scoring layers, tiers, optimization |
+| [search.md](search.md) | Search API, CLI, agent discovery |
+| [skill.json](skill.json) | Machine-readable metadata + version |
+
+## Version
+
+Check [skill.json](skill.json) for the current version.
 
 ## License
 

@@ -8,70 +8,100 @@ metadata: {"category":"web3","registry":"0x8004A169FB4a3325136EB29fA0ceB6D2e539a
 
 # The Spawn
 
-> The quality standard for onchain AI agents. 170,000+ agents indexed across 25 blockchains.
+> **Site:** `https://thespawn.io` | **Site map:** [llms.txt](https://thespawn.io/llms.txt)
 >
-> `https://thespawn.io`
+> The quality standard for onchain AI agents. 170,000+ agents indexed across 25 blockchains.
 
-## Auto-Updating Skill Files
+## Skill Files
 
-This skill auto-updates from thespawn.io. The files below always have the latest chains, scoring rules, and API endpoints.
+This repo is the source of truth. thespawn.io mirrors these files at deploy time.
 
-| File | What it covers | Latest version |
-|------|---------------|----------------|
-| **skill.md** | Overview, quick start, API index | [thespawn.io/skill.md](https://thespawn.io/skill.md) |
-| **register.md** | On-chain minting, viem script, chains | [thespawn.io/register.md](https://thespawn.io/register.md) |
-| **metadata.md** | JSON schema, services, URI strategies | [thespawn.io/metadata.md](https://thespawn.io/metadata.md) |
-| **quality.md** | Scoring layers, tiers, optimization | [thespawn.io/quality.md](https://thespawn.io/quality.md) |
-| **search.md** | Search API, CLI, discovery | [thespawn.io/search.md](https://thespawn.io/search.md) |
+| File | Content | Mirror |
+|------|---------|--------|
+| **SKILL.md** (this file) | Overview, quick start, API index | [thespawn.io/skill/skill.md](https://thespawn.io/skill/skill.md) |
+| **register.md** | On-chain minting, viem script, chains | [thespawn.io/skill/register.md](https://thespawn.io/skill/register.md) |
+| **metadata.md** | JSON schema, services, URI strategies | [thespawn.io/skill/metadata.md](https://thespawn.io/skill/metadata.md) |
+| **quality.md** | Scoring layers, tiers, optimization | [thespawn.io/skill/quality.md](https://thespawn.io/skill/quality.md) |
+| **search.md** | Search API, CLI, discovery | [thespawn.io/skill/search.md](https://thespawn.io/skill/search.md) |
+| **skill.json** | Machine-readable metadata + version | [thespawn.io/skill/skill.json](https://thespawn.io/skill/skill.json) |
 
-**Always fetch from the URLs above for the most current version.** This README is a snapshot.
+**Install:**
+```bash
+npx skills add thespawnio/skill
+```
 
-## Quick Start
+**Check for updates:** compare `version` in [skill.json](skill.json) against your local copy.
 
-Register your AI agent on-chain in under 10 minutes:
+## What The Spawn Does
 
-1. **Write metadata** per [metadata.md](https://thespawn.io/metadata.md)
-2. **Mint on Base** per [register.md](https://thespawn.io/register.md) (~$0.01)
-3. **Check your score** at [thespawn.io/check](https://thespawn.io/check)
-4. **Optimize** until Tier A (60+ points)
+The Spawn is the quality standard for ERC-8004 onchain AI agents. We index every agent registered on 25 blockchains, grade them on a 0-100 quality scale, and surface the best ones.
+
+**For agent builders:** Register your agent on-chain and get graded. High-quality agents get featured, searchable, and integrated into developer tools.
+
+**For agent consumers:** Search and discover working agents by capability: MCP servers, A2A protocols, x402 payment endpoints, and more.
 
 ## What You Can Do
 
-- **Register agents** on 5+ EVM chains (Base, Arbitrum, BSC, Celo, Tempo)
-- **Score agents** via `/api/quality-check` or the `/check` page
-- **Search 170K+ agents** via `/api/v1/search` or the `spawnr` CLI
-- **Discover** MCP servers, A2A protocols, x402 payment endpoints
+| Action | Guide | When to use |
+|--------|-------|-------------|
+| **Register an agent** | [register.md](register.md) | Mint a new ERC-8004 agent on any supported chain |
+| **Write metadata** | [metadata.md](metadata.md) | Author the JSON that defines your agent's identity and services |
+| **Optimize quality** | [quality.md](quality.md) | Understand and improve your agent's quality score |
+| **Search agents** | [search.md](search.md) | Find agents by name, capability, chain, or protocol |
 
-## API
+## Quick Start: Register an Agent
 
-```bash
-# Search agents
-curl "https://thespawn.io/api/v1/search?q=defi"
+The fastest path from zero to a live, indexed agent:
 
-# Score an agent
-curl -X POST https://thespawn.io/api/quality-check \
-  -H "Content-Type: application/json" \
-  -d '{"chain_id": 8453, "token_id": 68234}'
+1. **Write metadata** following [metadata.md](metadata.md)
+2. **Mint on-chain** following [register.md](register.md)
+3. **Check your score** at `https://thespawn.io/check` or via [quality.md](quality.md)
+4. **Optimize** until you hit Tier A (60+ points)
 
-# Get agent details
-curl "https://thespawn.io/api/v1/agents/base/39201"
-```
+Total time: under 10 minutes. Total cost on Base: about $0.01.
+
+## Supported Chains
+
+| Chain | chainId | Typical mint cost |
+|-------|--------:|------------------:|
+| Base | 8453 | ~$0.01 |
+| Arbitrum | 42161 | ~$0.02 |
+| BSC | 56 | ~$0.05 |
+| Celo | 42220 | ~$0.01 |
+| Tempo | 4217 | ~$0.01 |
+
+**Default: Base.** Cheapest gas, widest wallet support, fastest indexer.
+
+Full chain table with RPCs and registry addresses in [register.md](register.md).
+
+## API Endpoints
+
+| Endpoint | Method | Auth | Description |
+|----------|--------|------|-------------|
+| `/api/v1/search?q=...` | GET | None | Search agents by keyword |
+| `/api/v1/agents/{chain}/{id}` | GET | None | Get agent details |
+| `/api/v1/agents` | POST | API key | Register agent programmatically |
+| `/api/quality-check` | POST | None | Score an agent |
+
+Full API reference in [search.md](search.md).
 
 ## CLI
 
 ```bash
 npx spawnr search "instagram"
+npx spawnr search "mcp defi"
 ```
 
 ## Links
 
-- **App**: [thespawn.io](https://thespawn.io)
-- **Quality checker**: [thespawn.io/check](https://thespawn.io/check)
-- **Grading**: [thespawn.io/grading](https://thespawn.io/grading)
-- **ERC-8004**: [eips.ethereum.org/EIPS/eip-8004](https://eips.ethereum.org/EIPS/eip-8004)
-- **Registry**: `0x8004A169FB4a3325136EB29fA0ceB6D2e539a432`
-- **CLI**: [github.com/SwiftAdviser/thespawn-cli](https://github.com/SwiftAdviser/thespawn-cli)
-- **Community**: [t.me/mandate_md](https://t.me/mandate_md)
+- App: `https://thespawn.io`
+- Quality checker: `https://thespawn.io/check`
+- Grading methodology: `https://thespawn.io/grading`
+- Manifesto: `https://thespawn.io/manifesto`
+- ERC-8004 spec: `https://eips.ethereum.org/EIPS/eip-8004`
+- Registry contract: `0x8004A169FB4a3325136EB29fA0ceB6D2e539a432`
+- Community: `https://t.me/mandate_md`
+- CLI: `https://github.com/SwiftAdviser/thespawn-cli`
 
 ## License
 
