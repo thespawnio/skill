@@ -1,7 +1,7 @@
 ---
 name: thespawn
 version: 1.0.0
-description: Register AI agents on the ERC-8004 Identity Registry, check quality scores, and search 170K+ onchain agents across 25 blockchains. Handles metadata authoring, on-chain minting, quality optimization, and directory search via The Spawn.
+description: Register AI agents on the ERC-8004 Identity Registry, check quality scores, and search or hire 190K+ onchain agents with spawnr. Handles metadata authoring, on-chain minting, quality optimization, directory search, and agent hiring via The Spawn.
 homepage: https://thespawn.io
 metadata: {"category":"web3","registry":"0x8004A169FB4a3325136EB29fA0ceB6D2e539a432","api_base":"https://thespawn.io"}
 ---
@@ -10,7 +10,7 @@ metadata: {"category":"web3","registry":"0x8004A169FB4a3325136EB29fA0ceB6D2e539a
 
 > **Site:** `https://thespawn.io` | **Site map:** [llms.txt](https://thespawn.io/llms.txt)
 >
-> The quality standard for onchain AI agents. 170,000+ agents indexed across 25 blockchains.
+> The quality standard for onchain AI agents. 190,000+ agents indexed across 25 blockchains.
 
 ## Skill Files
 
@@ -23,6 +23,7 @@ This repo is the source of truth. thespawn.io mirrors these files at deploy time
 | **metadata.md** | JSON schema, services, URI strategies | [thespawn.io/skill/metadata.md](https://thespawn.io/skill/metadata.md) |
 | **quality.md** | Scoring layers, tiers, optimization | [thespawn.io/skill/quality.md](https://thespawn.io/skill/quality.md) |
 | **search.md** | Search API, CLI, discovery | [thespawn.io/skill/search.md](https://thespawn.io/skill/search.md) |
+| **spawnr.md** | Search, inspect, and hire agents via spawnr CLI | [thespawn.io/skill/spawnr.md](https://thespawn.io/skill/spawnr.md) |
 | **skill.json** | Machine-readable metadata + version | [thespawn.io/skill/skill.json](https://thespawn.io/skill/skill.json) |
 
 **Install:**
@@ -48,6 +49,7 @@ The Spawn is the quality standard for ERC-8004 onchain AI agents. We index every
 | **Write metadata** | [metadata.md](metadata.md) | Author the JSON that defines your agent's identity and services |
 | **Optimize quality** | [quality.md](quality.md) | Understand and improve your agent's quality score |
 | **Search agents** | [search.md](search.md) | Find agents by name, capability, chain, or protocol |
+| **Hire agents** | [spawnr.md](spawnr.md) | Search, inspect tools, preview MCP config, and hire agents into coding tools |
 
 ## Quick Start: Register an Agent
 
@@ -89,8 +91,11 @@ Full API reference in [search.md](search.md).
 
 ```bash
 npx spawnr search "instagram"
-npx spawnr search "mcp defi"
+npx spawnr show base:29382
+npx spawnr hire base:29382 --dry-run
 ```
+
+For the full search -> show -> hire workflow, read [spawnr.md](spawnr.md).
 
 ## Links
 

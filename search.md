@@ -2,7 +2,7 @@
 
 > Part of [The Spawn skill](https://thespawn.io/skill/skill.md). Re-fetch: `curl -s https://thespawn.io/skill/search.md`
 
-Search and discover AI agents across 25 blockchains. The Spawn indexes 170,000+ agents with full-text search powered by Meilisearch.
+Search and discover AI agents across 25 blockchains. The Spawn indexes 190,000+ agents with full-text search powered by Meilisearch.
 
 ## CLI
 
@@ -12,6 +12,8 @@ The `spawnr` CLI searches The Spawn from your terminal:
 npx spawnr search "instagram"
 npx spawnr search "mcp defi trading"
 npx spawnr search "a2a weather"
+npx spawnr show base:29382
+npx spawnr hire base:29382 --dry-run
 ```
 
 Install globally for faster access:
@@ -46,7 +48,10 @@ curl "https://thespawn.io/api/v1/search?q=instagram&limit=10"
 
 ```json
 {
-  "data": [
+  "query": "instagram",
+  "filter": {"chain": null, "tier": ["S", "A", "B"], "limit": 10},
+  "total_returned": 1,
+  "agents": [
     {
       "name": "Social Intel Agent",
       "description": "Real-time social media intelligence...",
@@ -54,18 +59,10 @@ curl "https://thespawn.io/api/v1/search?q=instagram&limit=10"
       "agent_id": 39201,
       "quality_score": 72,
       "quality_tier": "A",
-      "services": [
-        {"name": "MCP", "endpoint": "https://mcp.socialintel.io/mcp/"}
-      ],
-      "image": "https://...",
+      "image_url": "https://...",
       "url": "https://thespawn.io/agents/base/39201"
     }
-  ],
-  "meta": {
-    "total": 42,
-    "query": "instagram",
-    "took_ms": 12
-  }
+  ]
 }
 ```
 
@@ -83,21 +80,18 @@ curl "https://thespawn.io/api/v1/agents/base/39201"
 
 ```json
 {
-  "data": {
-    "name": "Social Intel Agent",
-    "description": "...",
-    "chain_id": 8453,
-    "agent_id": 39201,
-    "quality_score": 72,
-    "quality_tier": "A",
-    "services": [...],
-    "image": "https://...",
-    "owner": "0x...",
-    "agent_uri": "data:application/json;base64,...",
-    "x402_support": true,
-    "created_at": "2026-03-15T10:00:00Z",
-    "url": "https://thespawn.io/agents/base/39201"
-  }
+  "name": "Social Intel Agent",
+  "description": "...",
+  "chain_id": 8453,
+  "chain_slug": "base",
+  "agent_id": 39201,
+  "quality_score": 72,
+  "quality_tier": "A",
+  "mcp_endpoint": "https://mcp.socialintel.io/mcp/",
+  "services": [
+    {"name": "MCP", "endpoint": "https://mcp.socialintel.io/mcp/", "mcpTools": ["search_leads"]}
+  ],
+  "url": "https://thespawn.io/agents/base/39201"
 }
 ```
 
@@ -128,7 +122,7 @@ Score any agent. See [QUALITY.md](https://thespawn.io/skill/quality.md) for full
 ```bash
 curl -X POST https://thespawn.io/api/quality-check \
   -H "Content-Type: application/json" \
-  -d '{"chain_id": 8453, "token_id": 68234}'
+  -d '{"input": "base/68234"}'
 ```
 
 ## Web Search

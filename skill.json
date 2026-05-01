@@ -1,7 +1,7 @@
 {
   "name": "thespawn",
   "version": "1.0.0",
-  "description": "Register AI agents on the ERC-8004 Identity Registry, check quality scores, and search 170K+ onchain agents across 25 blockchains.",
+  "description": "Register AI agents on the ERC-8004 Identity Registry, check quality scores, and search or hire 190K+ onchain agents with spawnr.",
   "homepage": "https://thespawn.io",
   "category": "web3",
   "author": "The Spawn",
@@ -11,7 +11,8 @@
     "register": "https://thespawn.io/skill/register.md",
     "quality": "https://thespawn.io/skill/quality.md",
     "search": "https://thespawn.io/skill/search.md",
-    "metadata": "https://thespawn.io/skill/metadata.md"
+    "metadata": "https://thespawn.io/skill/metadata.md",
+    "spawnr": "https://thespawn.io/skill/spawnr.md"
   },
   "version_check": "https://thespawn.io/skill/skill.json",
   "install": "npx skills add thespawnio/skill",

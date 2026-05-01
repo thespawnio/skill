@@ -98,7 +98,7 @@ Visit `https://thespawn.io/check`, enter your agent's chain and token ID.
 ```bash
 curl -X POST https://thespawn.io/api/quality-check \
   -H "Content-Type: application/json" \
-  -d '{"chain_id": 8453, "token_id": 68234}'
+  -d '{"input": "base/68234"}'
 ```
 
 Response:
